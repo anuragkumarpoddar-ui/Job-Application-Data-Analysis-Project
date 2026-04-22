@@ -1,0 +1,86 @@
+import pandas as pd
+
+# 1. Create Data 
+data = {
+    "Company": ["TCS", "Infosys", "Wipro", "Accenture", "Capgemini", "Google", "Amazon"],
+    "Role": ["Data Analyst", "Data Analyst", "Data Analyst", "Data Analyst", "Data Analyst", "Data Analyst", "Business Analyst"],
+    "Location": ["Delhi", "Bangalore", "Hyderabad", "Pune", "Noida", "Bangalore", "Hyderabad"],
+    "Platform": ["LinkedIn", "Naukri", "LinkedIn", "Referral", "Naukri", "LinkedIn", "Referral"],
+    "Date_Applied": ["2026-04-01", "2026-04-03", "2026-04-05", "2026-04-07", "2026-04-10", "2026-04-12", "2026-04-15"],
+    "Status": ["Applied", "Interview", "Rejected", "Interview", "Applied", "Rejected", "Interview"],
+    "Salary_Offered": [0, 600000, 0, 700000, 0, 0, 1200000]
+}
+
+df = pd.DataFrame(data)
+
+# Convert date column
+df["Date_Applied"] = pd.to_datetime(df["Date_Applied"])
+
+# 2. Basic Data Overview
+
+print("\n FULL DATA\n")
+print(df)
+
+print("\n DATA INFO\n")
+print(df.info())
+
+print("\n SUMMARY STATS\n")
+print(df.describe())
+
+# -------------------------------
+# 3. Data Analysis
+# -------------------------------
+
+# Total applications
+print("\n Total Applications:", len(df))
+
+# Status breakdown
+print("\n Status Count:")
+print(df["Status"].value_counts())
+
+# Platform usage
+print("\n Platform Count:")
+print(df["Platform"].value_counts())
+
+# Interview rate
+interviews = df[df["Status"] == "Interview"]
+rate = (len(interviews) / len(df)) * 100
+print(f"\n Interview Rate: {rate:.2f}%")
+
+# Average salary (ignore 0)
+avg_salary = df[df["Salary_Offered"] > 0]["Salary_Offered"].mean()
+print(f"\n Average Salary: ₹{avg_salary:.0f}")
+
+# -------------------------------
+# 4. Grouping (IMPORTANT for jobs)
+# -------------------------------
+
+# Platform vs Status
+print("\n Platform vs Status:")
+print(pd.crosstab(df["Platform"], df["Status"]))
+
+# Applications per location
+print("\n Applications by Location:")
+print(df.groupby("Location").size())
+
+# Salary by Role
+print("\n Avg Salary by Role:")
+print(df.groupby("Role")["Salary_Offered"].mean())
+
+# -------------------------------
+# 5. Filtering (Real-world usage)
+# -------------------------------
+
+# Only interviews
+print("\n Interview Calls:")
+print(df[df["Status"] == "Interview"])
+
+# High salary jobs
+print("\n High Salary Jobs (>7 LPA):")
+print(df[df["Salary_Offered"] > 700000][["Company", "Salary_Offered"]])
+
+# -------------------------------
+# 6. Sorting
+# -------------------------------
+print("\n Sorted by Salary (High to Low):")
+print(df.sort_values(by="Salary_Offered", ascending=False))
