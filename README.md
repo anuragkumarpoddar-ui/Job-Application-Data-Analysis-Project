@@ -4,9 +4,9 @@
 
 In today's competitive job market, tracking applications and analyzing outcomes can help job seekers make better career decisions.
 
-This project analyzes job application data using **Python** and **Pandas** to uncover meaningful insights about application trends, platform effectiveness, interview conversion rates, and salary opportunities.
+This Practice project analyzes job application data using **Python** and **Pandas** to uncover meaningful insights about application trends, platform effectiveness, interview conversion rates, and salary opportunities.
 
-The project simulates a **real-world job tracking system**, demonstrating how data analytics can optimize the job search process and support data-driven decision-making.
+The Practice project simulates a **real-world job tracking system**, demonstrating how data analytics can optimize the job search process and support data-driven decision-making.
 
 ---
 
